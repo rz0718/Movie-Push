@@ -2,20 +2,23 @@
 # -*- coding: utf-8 -*-
 import smtplib  
 from email.mime.text import MIMEText  
+import time
 
-mailto_list=["rui91seu@gmail.com","kwkwvenusgod@gmail.com","nick.yinyang@gmail.com","xhgeng131500@gmail.com","dawenliu0909@gmail.com","Chenly.xian@gmail.com","cqbaizuo@gmail.com"]
+mailto_list=[]   #add the email accounts of receivers
+
 mail_host="smtp.gmail.com"  #
-mail_user="coolcoolruimovie"    #
-mail_pass="123456ntu"   #
-mail_postfix="gmail.com"  #
+mail_user=""    #      Setting up the senders' account
+mail_pass=""   #  Password
+mail_postfix="gmail.com"  #  The domain of emails
 
 
-def update_maillist(filepath):
+
+## updating maillists from local files and possible new files
+def update_maillist(filepath,new_list=[]):
 	mailto_list = []
 	fp = open(filepath,'r')
 	for mail in fp:
 		mailto_list.append(mail)
-	new_list = []
 	mailto_list[:] = list(set(new_list+mailto_list))
 	fp.close()
 	fp = open(filepath,'w')
@@ -24,6 +27,8 @@ def update_maillist(filepath):
 	fp.close()
 
 
+
+## Sending the email with the local html file as its content
 def send_mail(to_list,sub,filepath):  
 	
 	post = open(filepath,'r')
@@ -52,10 +57,14 @@ def send_mail(to_list,sub,filepath):
 update_maillist("to_list")
 
  
-"""
-filepath = "2015-05-16.html"
+#Obtain the filepath for html file, since the file is named by the current time
+time_now = time.strftime('%Y-%m-%d',time.localtime(time.time()))
+filepath = time_now+'.html'
+
+
+
 if send_mail(mailto_list,"moive report",filepath):
 	print "succ"  
 else:  
 	print "faileds"  
-"""
+

@@ -5,12 +5,7 @@ import time
 import os
 
 
-#movie:
-#Users/rui/Dropbox/movie_push
- 
-#print("please input the name of film u want to search:")
 
-#film_name = raw_input()
 def query_movie_info(Moive_Title):
     movieurlbase = "http://api.douban.com/v2/movie/search"
     DOUBAN_APIKEY = "0bb9e4f945380805232daeebcfa8180f"  # 这里需要填写你自己在豆瓣上申请的应用的APIKEY
@@ -22,7 +17,7 @@ def query_movie_info(Moive_Title):
     return movie
 
 
-
+# DB QUERY BASED NAMES
 def DBquery_movie_rate(Moive_Title):
 	movieurlbase = "http://api.douban.com/v2/movie/subject/"
 	DOUBAN_APIKEY = "0bb9e4f945380805232daeebcfa8180f"  # 这里需要填写你自己在豆瓣上申请的应用的APIKEY
@@ -41,6 +36,9 @@ def DBquery_movie_rate(Moive_Title):
     
 	return rate, movie_url
 	
+
+
+# IMDB QUERY BASED NAMES
 def IMquery_movie_rate(Moive_Title):
 	movie_search = '+'.join(Moive_Title.split())
     
@@ -65,6 +63,7 @@ def IMquery_movie_rate(Moive_Title):
 		score = (tt[0].get_text().split()[0])
 	
 	return score, movie_url
+
 
 
 def parsing_html(html_base,IMDB_query, DB_query):
@@ -100,7 +99,7 @@ def parsing_html(html_base,IMDB_query, DB_query):
 
 
 
-
+# RETURN A LIST OF DICTIONARIES CONTAINING MOVIES' INFORMATION
 def query_moive_onshow(moive_url,IMDB_query, DB_query):
 	html_base = urllib2.urlopen(moive_url).read()
 	soup = BeautifulSoup(html_base)
@@ -145,7 +144,7 @@ def query_moive_onshow(moive_url,IMDB_query, DB_query):
 
 
 
-
+#HTML GENERATEING (BASED ON THE RATING)
 def movie_post_generate(movie_list):
 	time_now = time.strftime('%Y-%m-%d',time.localtime(time.time()))
 	time_now = time_now+'.html'

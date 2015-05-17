@@ -1,0 +1,12 @@
+This is a Moive-Push script, which can recommend the now-showing movies in SG with its detailed information, IMDB score, Douban rating and tickets gateway through emails. The judging line is that one of two scores from IMDB and Douban should exceeds 7.0 point.  
+
+Two Files:
+1 crawel_movie.py:
+   (1) Fetch now showing movies' information from  http://www.cinemaonline.sg/ and http://www.popcorn.sg/. In addition, IMDB and Douban are both queried to obtain rating information.
+   (2) According to local files including html template, these informations can be used to generate movie posters. 
+
+2 emailsend.py:
+	(1) Send the generated movie posters formatted in the html file as an email to the interesting persons, whose emails account are recorded in "to_list"
+
+
+

@@ -14,17 +14,19 @@ mail_postfix="gmail.com"  #  The domain of emails
 
 
 ## updating maillists from local files and possible new files
-def update_maillist(filepath,new_list=[]):
+def update_maillist(filepath):
 	mailto_list = []
 	fp = open(filepath,'r')
 	for mail in fp:
-		mailto_list.append(mail)
+		mailto_list.append(mail.split()[0])
+	new_list = []
 	mailto_list[:] = list(set(new_list+mailto_list))
-	fp.close()
 	fp = open(filepath,'w')
 	for mail in mailto_list:
 		fp.write(mail)
+		fp.write('\n')
 	fp.close()
+	return mailto_list
 
 
 
@@ -54,7 +56,7 @@ def send_mail(to_list,sub,filepath):
 		print str(e)  
 		return False  
 
-update_maillist("to_list")
+mailto_list = update_maillist("to_list")
 
  
 #Obtain the filepath for html file, since the file is named by the current time

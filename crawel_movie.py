@@ -172,12 +172,16 @@ def movie_post_generate(movie_list):
 			namelist = ['Running Time','Release Date', 'Language','Genre','Format','ticket']
 			for index,i in enumerate(row_h):
 				temp_curr[i] = re.sub('ruiruicool', movie[namelist[index]],temp_curr[i])
-			row_h2 = [1,2,8,9]
-			namelist2 = ['pic','pic','name', 'Classification','IM_url','IM_rating','DB_url','DB_rating']
+			row_h2 = [2,8,9]
+			namelist2 = ['name', 'Classification','IM_url','IM_rating','DB_url','DB_rating']
+			
 			
 			for index,i in enumerate(row_h2):
 				temp_curr[i] = re.sub('ruiruicool',str(movie[namelist2[int(index*2)]]),temp_curr[i])
 				temp_curr[i] = re.sub('ruicool',str(movie[namelist2[int(index*2+1)]]),temp_curr[i])
+			temp_curr[1] = re.sub('ruicool1',str(movie['IM_url']),temp_curr[1])
+			temp_curr[1] = re.sub('ruiruicool',str(movie['pic']),temp_curr[1])
+			temp_curr[1] = re.sub('ruicool',str(movie['pic']),temp_curr[1])
 			for line in temp_curr:
 				post.write(line)
 		else:
